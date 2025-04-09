@@ -94,6 +94,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       if (day === 3) return 199;
       if (day === 4) return 193;
       if (day === 5) return 197;
+      if (day === 15) return 152; // Highlighted date from design
       return 122 + (day % 5) * 10; // Simple pattern for other days
     } else { // June
       if (day === 1) return 157;
@@ -104,7 +105,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   };
   
   const renderCalendarDay = (day: number | null, month: number, year: number) => {
-    if (day === null) return <div className="h-10"></div>;
+    if (day === null) return <div className="h-12"></div>;
     
     const isInRange = isDateInRange(day, month, year);
     const isCheckIn = isCheckInDate(day, month, year);
@@ -114,12 +115,12 @@ export const Calendar: React.FC<CalendarProps> = ({
     
     const price = getPriceForDate(day, month);
     
-    let cellClass = "flex flex-col items-center justify-center h-10 text-center border border-transparent";
+    let cellClass = "flex flex-col items-center justify-center h-12 text-center border border-transparent cursor-pointer";
     
     if (isHighlighted || isCheckIn || isCheckOut) {
-      cellClass = "flex flex-col items-center justify-center h-10 text-center bg-indigo-900 text-white";
+      cellClass = "flex flex-col items-center justify-center h-12 text-center bg-indigo-900 text-white cursor-pointer";
     } else if (isInRange) {
-      cellClass = "flex flex-col items-center justify-center h-10 text-center bg-indigo-100";
+      cellClass = "flex flex-col items-center justify-center h-12 text-center bg-indigo-100 cursor-pointer";
     }
     
     return (
@@ -135,7 +136,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-4">
         {/* May Calendar */}
         <div>
           <div className="flex justify-between items-center mb-2">
@@ -152,11 +153,11 @@ export const Calendar: React.FC<CalendarProps> = ({
           
           <div className="grid grid-cols-7 gap-0">
             {dayNames.map((day, index) => (
-              <div key={index} className="text-center text-xs py-1 text-gray-300">{day}</div>
+              <div key={index} className="text-center text-xs py-1 text-gray-400">{day}</div>
             ))}
             
             {firstMonthData.map((day, index) => (
-              <div key={`may-${index}`} className="p-0.5">
+              <div key={`may-${index}`} className="p-0">
                 {renderCalendarDay(day, firstMonth, currentYear)}
               </div>
             ))}
@@ -179,11 +180,11 @@ export const Calendar: React.FC<CalendarProps> = ({
           
           <div className="grid grid-cols-7 gap-0">
             {dayNames.map((day, index) => (
-              <div key={index} className="text-center text-xs py-1 text-gray-300">{day}</div>
+              <div key={index} className="text-center text-xs py-1 text-gray-400">{day}</div>
             ))}
             
             {secondMonthData.map((day, index) => (
-              <div key={`june-${index}`} className="p-0.5">
+              <div key={`june-${index}`} className="p-0">
                 {renderCalendarDay(day, secondMonth, currentYear)}
               </div>
             ))}
@@ -197,9 +198,9 @@ export const Calendar: React.FC<CalendarProps> = ({
         Nightly rate: 0-4 days
       </div>
       
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-4">
         <Button 
-          className="bg-indigo-900 hover:bg-indigo-800 text-white uppercase text-sm px-6"
+          className="bg-indigo-900 hover:bg-indigo-800 text-white uppercase text-sm px-6 py-2 rounded"
           onClick={onApplyDates}
         >
           APPLY DATES
