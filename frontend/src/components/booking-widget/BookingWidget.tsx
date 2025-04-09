@@ -108,7 +108,7 @@ export const BookingWidget: React.FC = () => {
             
             <div className="mt-4">
               <Button 
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 uppercase font-medium"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 uppercase font-medium"
                 onClick={handleSearch}
               >
                 SEARCH
