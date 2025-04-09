@@ -26,12 +26,12 @@ export const DateSelector: React.FC<DateSelectorProps> = ({
     <div className="flex items-center space-x-2">
       <div className="flex-1">
         <div 
-          className="border border-gray-300 rounded bg-white p-2 flex items-center cursor-pointer text-gray-700"
+          className="border border-gray-300 rounded bg-white p-2 flex items-center justify-between cursor-pointer text-gray-700"
           onClick={onCheckInClick}
         >
-          <div className="flex-1">
+          <div>
             <div className="text-xs text-gray-500">Check in</div>
-            <div className="text-sm">{formatDate(checkInDate) || 'Select date'}</div>
+            <div className="text-sm font-medium">{formatDate(checkInDate) || 'Select date'}</div>
           </div>
           <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -43,12 +43,12 @@ export const DateSelector: React.FC<DateSelectorProps> = ({
       
       <div className="flex-1">
         <div 
-          className="border border-gray-300 rounded bg-white p-2 flex items-center cursor-pointer text-gray-700"
+          className="border border-gray-300 rounded bg-white p-2 flex items-center justify-between cursor-pointer text-gray-700"
           onClick={onCheckOutClick}
         >
-          <div className="flex-1">
+          <div>
             <div className="text-xs text-gray-500">Check out</div>
-            <div className="text-sm">{formatDate(checkOutDate) || 'Select date'}</div>
+            <div className="text-sm font-medium">{formatDate(checkOutDate) || 'Select date'}</div>
           </div>
           <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />

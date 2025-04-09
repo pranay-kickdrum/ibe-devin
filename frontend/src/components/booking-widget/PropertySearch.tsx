@@ -37,7 +37,7 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
       >
         <input
           type="text"
-          className="w-full p-2 text-gray-700 rounded outline-none"
+          className="w-full p-2 text-gray-700 rounded outline-none text-sm"
           placeholder="Search all properties"
           value={selectedProperty || searchText}
           onChange={(e) => {
@@ -58,7 +58,7 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
             filteredProperties.map((property, index) => (
               <div 
                 key={index}
-                className="p-2 hover:bg-gray-100 cursor-pointer flex items-center"
+                className="p-2 hover:bg-gray-100 cursor-pointer flex items-center text-sm"
                 onClick={() => handleSelectProperty(property)}
               >
                 <input 
@@ -71,7 +71,7 @@ export const PropertySearch: React.FC<PropertySearchProps> = ({
               </div>
             ))
           ) : (
-            <div className="p-2 text-gray-500">No properties found</div>
+            <div className="p-2 text-gray-500 text-sm">No properties found</div>
           )}
         </div>
       )}

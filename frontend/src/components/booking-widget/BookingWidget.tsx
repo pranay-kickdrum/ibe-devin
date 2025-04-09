@@ -30,20 +30,20 @@ export const BookingWidget: React.FC = () => {
   };
   
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-lg">
-      <div className="bg-zinc-800 p-3 flex justify-between items-center">
-        <div className="text-white text-sm">
+    <div className="flex flex-col w-full max-w-md mx-auto bg-gray-200 rounded-md overflow-hidden shadow-lg">
+      <div className="bg-white p-2 flex justify-between items-center">
+        <div className="text-black text-sm">
           <span className="font-bold">Kickdrum</span> Internet Booking Engine
         </div>
-        <div className="flex items-center gap-2 text-white text-sm">
+        <div className="flex items-center gap-2 text-black text-sm">
           <span>En</span>
           <span>$ USD</span>
         </div>
       </div>
       
-      <div className="p-4 bg-zinc-700 text-white">
+      <div className="p-4 bg-zinc-800 text-white">
         {showCalendar ? (
-          <div className="space-y-4">
+          <div>
             <Calendar 
               checkInDate={checkInDate}
               checkOutDate={checkOutDate}
@@ -85,7 +85,7 @@ export const BookingWidget: React.FC = () => {
                 <div className="border border-gray-300 rounded bg-white p-2 flex items-center">
                   <input 
                     type="number" 
-                    className="w-full outline-none text-gray-700"
+                    className="w-full outline-none text-gray-700 text-sm"
                     value={rooms}
                     min={1}
                     max={10}
@@ -108,7 +108,7 @@ export const BookingWidget: React.FC = () => {
             
             <div className="mt-4">
               <Button 
-                className="w-full bg-indigo-900 hover:bg-indigo-800 text-white py-2"
+                className="w-full bg-indigo-900 hover:bg-indigo-800 text-white py-2 uppercase"
                 onClick={handleSearch}
               >
                 SEARCH

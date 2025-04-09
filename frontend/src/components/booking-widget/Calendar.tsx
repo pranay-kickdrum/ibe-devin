@@ -16,9 +16,9 @@ export const Calendar: React.FC<CalendarProps> = ({
   onSelectCheckOut,
   onApplyDates
 }) => {
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
+  const firstMonth = 4; // May (0-indexed)
+  const secondMonth = 5; // June (0-indexed)
+  const currentYear = 2025; // Year from the design
   
   const generateMonthData = (year: number, month: number) => {
     const firstDay = new Date(year, month, 1).getDay();
@@ -36,11 +36,8 @@ export const Calendar: React.FC<CalendarProps> = ({
     return days;
   };
   
-  const currentMonthData = generateMonthData(currentYear, currentMonth);
-  const nextMonthData = generateMonthData(
-    currentMonth === 11 ? currentYear + 1 : currentYear,
-    currentMonth === 11 ? 0 : currentMonth + 1
-  );
+  const firstMonthData = generateMonthData(currentYear, firstMonth);
+  const secondMonthData = generateMonthData(currentYear, secondMonth);
   
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -90,25 +87,39 @@ export const Calendar: React.FC<CalendarProps> = ({
     }
   };
   
+  const getPriceForDate = (day: number, month: number) => {
+    if (month === 4) { // May
+      if (day === 1) return 122;
+      if (day === 2) return 162;
+      if (day === 3) return 199;
+      if (day === 4) return 193;
+      if (day === 5) return 197;
+      return 122 + (day % 5) * 10; // Simple pattern for other days
+    } else { // June
+      if (day === 1) return 157;
+      if (day === 2) return 163;
+      if (day === 3) return 108;
+      return 120 + (day % 5) * 10; // Simple pattern for other days
+    }
+  };
+  
   const renderCalendarDay = (day: number | null, month: number, year: number) => {
-    if (day === null) return <div className="h-12"></div>;
+    if (day === null) return <div className="h-10"></div>;
     
     const isInRange = isDateInRange(day, month, year);
     const isCheckIn = isCheckInDate(day, month, year);
     const isCheckOut = isCheckOutDate(day, month, year);
     
-    const price = Math.floor(Math.random() * 100) + 100;
+    const isHighlighted = month === 4 && day === 15;
     
-    let cellClass = "flex flex-col items-center justify-center h-12 text-center";
+    const price = getPriceForDate(day, month);
     
-    if (isCheckIn) {
-      cellClass += " bg-indigo-900 text-white";
-    } else if (isCheckOut) {
-      cellClass += " bg-indigo-900 text-white";
+    let cellClass = "flex flex-col items-center justify-center h-10 text-center border border-transparent";
+    
+    if (isHighlighted || isCheckIn || isCheckOut) {
+      cellClass = "flex flex-col items-center justify-center h-10 text-center bg-indigo-900 text-white";
     } else if (isInRange) {
-      cellClass += " bg-indigo-200";
-    } else {
-      cellClass += " hover:bg-gray-100";
+      cellClass = "flex flex-col items-center justify-center h-10 text-center bg-indigo-100";
     }
     
     return (
@@ -116,7 +127,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         className={cellClass}
         onClick={() => handleDateClick(day, month, year)}
       >
-        <div className="text-xs">{day}</div>
+        <div className="text-xs font-medium">{day}</div>
         <div className="text-xs">${price}</div>
       </div>
     );
@@ -124,67 +135,63 @@ export const Calendar: React.FC<CalendarProps> = ({
   
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        {/* Current Month Calendar */}
+      <div className="grid grid-cols-2 gap-6">
+        {/* May Calendar */}
         <div>
           <div className="flex justify-between items-center mb-2">
-            <button className="text-gray-400">
+            <button className="text-gray-400 px-1">
               &lt;
             </button>
             <div className="text-sm font-medium">
-              {monthNames[currentMonth]} {currentYear}
+              {monthNames[firstMonth]} {currentYear}
             </div>
-            <button className="text-gray-400">
+            <button className="text-gray-400 px-1">
               &gt;
             </button>
           </div>
           
-          <div className="grid grid-cols-7 gap-1">
+          <div className="grid grid-cols-7 gap-0">
             {dayNames.map((day, index) => (
-              <div key={index} className="text-center text-xs py-1">{day}</div>
+              <div key={index} className="text-center text-xs py-1 text-gray-300">{day}</div>
             ))}
             
-            {currentMonthData.map((day, index) => (
-              <div key={`current-${index}`}>
-                {renderCalendarDay(day, currentMonth, currentYear)}
+            {firstMonthData.map((day, index) => (
+              <div key={`may-${index}`} className="p-0.5">
+                {renderCalendarDay(day, firstMonth, currentYear)}
               </div>
             ))}
           </div>
         </div>
         
-        {/* Next Month Calendar */}
+        {/* June Calendar */}
         <div>
           <div className="flex justify-between items-center mb-2">
-            <button className="text-gray-400">
+            <button className="text-gray-400 px-1">
               &lt;
             </button>
             <div className="text-sm font-medium">
-              {monthNames[currentMonth === 11 ? 0 : currentMonth + 1]} {currentMonth === 11 ? currentYear + 1 : currentYear}
+              {monthNames[secondMonth]} {currentYear}
             </div>
-            <button className="text-gray-400">
+            <button className="text-gray-400 px-1">
               &gt;
             </button>
           </div>
           
-          <div className="grid grid-cols-7 gap-1">
+          <div className="grid grid-cols-7 gap-0">
             {dayNames.map((day, index) => (
-              <div key={index} className="text-center text-xs py-1">{day}</div>
+              <div key={index} className="text-center text-xs py-1 text-gray-300">{day}</div>
             ))}
             
-            {nextMonthData.map((day, index) => (
-              <div key={`next-${index}`}>
-                {renderCalendarDay(
-                  day, 
-                  currentMonth === 11 ? 0 : currentMonth + 1, 
-                  currentMonth === 11 ? currentYear + 1 : currentYear
-                )}
+            {secondMonthData.map((day, index) => (
+              <div key={`june-${index}`} className="p-0.5">
+                {renderCalendarDay(day, secondMonth, currentYear)}
               </div>
             ))}
           </div>
         </div>
       </div>
       
-      <div className="text-xs text-gray-400 mt-2">
+      <div className="text-xs text-gray-400 mt-2 text-center">
         Prices are displayed in USD
         <br />
         Nightly rate: 0-4 days
@@ -192,7 +199,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       
       <div className="flex justify-end">
         <Button 
-          className="bg-indigo-900 hover:bg-indigo-800 text-white"
+          className="bg-indigo-900 hover:bg-indigo-800 text-white uppercase text-sm px-6"
           onClick={onApplyDates}
         >
           APPLY DATES
