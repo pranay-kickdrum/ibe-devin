@@ -200,7 +200,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       
       <div className="flex justify-end mt-4">
         <Button 
-          className="bg-indigo-900 hover:bg-indigo-800 text-white uppercase text-sm px-6 py-2 rounded"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white uppercase text-sm px-6 py-2 rounded font-medium"
           onClick={onApplyDates}
         >
           APPLY DATES
