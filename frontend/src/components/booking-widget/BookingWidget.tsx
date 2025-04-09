@@ -6,7 +6,7 @@ import { DateSelector } from './DateSelector';
 import { GuestSelector } from './GuestSelector';
 
 export const BookingWidget: React.FC = () => {
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(true);
   const [selectedProperty, setSelectedProperty] = useState('');
   const [checkInDate, setCheckInDate] = useState<Date | null>(null);
   const [checkOutDate, setCheckOutDate] = useState<Date | null>(null);
