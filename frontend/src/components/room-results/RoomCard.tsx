@@ -11,6 +11,7 @@ interface RoomProps {
     nearProperty: boolean;
     specialOffer?: string;
     image: string;
+    amenities: string[];
   };
 }
 
@@ -96,6 +97,18 @@ export const RoomCard: React.FC<RoomProps> = ({ room }) => {
             {room.specialOffer}
           </div>
         )}
+        
+        {/* Amenities */}
+        <div className="flex flex-wrap gap-1 mb-3">
+          {room.amenities.map((amenity, index) => (
+            <span 
+              key={index} 
+              className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full"
+            >
+              {amenity}
+            </span>
+          ))}
+        </div>
         
         <div className="flex justify-between items-center">
           <div>
