@@ -52,7 +52,7 @@ export const RoomResultsPage: React.FC = () => {
       </div>
 
       {/* Hero Image */}
-      <div className="h-[200px] bg-gray-500"></div>
+      <div className="h-[200px] bg-gray-500 bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")' }}></div>
 
       {/* Progress Steps */}
       <ProgressSteps currentStep={1} />
