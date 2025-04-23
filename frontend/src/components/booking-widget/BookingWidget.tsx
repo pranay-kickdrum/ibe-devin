@@ -4,8 +4,10 @@ import { Calendar } from './Calendar';
 import { PropertySearch } from './PropertySearch';
 import { DateSelector } from './DateSelector';
 import { GuestSelector } from './GuestSelector';
+import { useNavigate } from 'react-router-dom';
 
 export const BookingWidget: React.FC = () => {
+  const navigate = useNavigate();
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState('');
   const [checkInDate, setCheckInDate] = useState<Date | null>(null);
@@ -27,6 +29,8 @@ export const BookingWidget: React.FC = () => {
       rooms,
       needAccessibleRoom
     });
+    
+    navigate('/room-results');
   };
   
   return (
