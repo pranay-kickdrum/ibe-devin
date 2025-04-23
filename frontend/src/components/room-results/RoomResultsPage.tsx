@@ -131,8 +131,8 @@ export const RoomResultsPage: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <div className="bg-indigo-900 p-2 text-white text-xs text-center">
-        <div>© Kickdrum Technology Group, LLC.</div>
+      <div className="bg-indigo-900 p-3 text-white text-xs text-center">
+        <div className="font-medium">© Kickdrum Technology Group, LLC.</div>
         <div>All rights Reserved</div>
       </div>
     </div>
